@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>miner_detector.ico</ApplicationIcon>
+    <AssemblyTitle>سیستم شناسایی ماینر استان ایلام</AssemblyTitle>
+    <AssemblyDescription>نرم‌افزار جامع شناسایی و نظارت بر ماینرهای ارز دیجیتال در استان ایلام</AssemblyDescription>
+    <AssemblyCompany>سازمان فناوری اطلاعات استان ایلام</AssemblyCompany>
+    <AssemblyProduct>Ilam Miner Detector</AssemblyProduct>
+    <AssemblyCopyright>Copyright © 2024 Ilam Province IT Organization</AssemblyCopyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="System.Net.NetworkInformation" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="miner_detector.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reports\" />
+    <Folder Include="Logs\" />
+    <Folder Include="Database\" />
+    <Folder Include="Exports\" />
+  </ItemGroup>
+
+</Project>
