@@ -33,13 +33,6 @@ interface OwnerInfo {
     postalCode: string;
     coordinates: [number, number];
   };
-  electricityAccount: {
-    accountNumber: string;
-    customerCode: string;
-    averageConsumption: number;
-    currentConsumption: number;
-    connectionType: string;
-  };
   internetConnection: {
     provider: string;
     plan: string;
