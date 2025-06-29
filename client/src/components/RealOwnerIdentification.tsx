@@ -74,7 +74,7 @@ export default function RealOwnerIdentification() {
   const [selectedOwner, setSelectedOwner] = useState<OwnerInfo | null>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // شبیه‌سازی جستجو در پایگاه‌های ��اده دولتی
+  // شبیه‌سازی جستجو در پایگاه‌های داده دولتی
   const searchGovernmentDatabases = async (
     query: string,
   ): Promise<OwnerInfo[]> => {
@@ -349,11 +349,14 @@ export default function RealOwnerIdentification() {
             </div>
           )}
 
-          <Alert className="bg-orange-900/20 border-orange-700">
+          <Alert className="bg-blue-900/20 border-blue-700">
             <AlertTriangle className="w-4 h-4" />
-            <AlertDescription className="text-orange-200">
-              این سیستم به پایگاه‌های داده دولتی متصل است: شرکت برق، مخابرات،
-              ثبت احوال، شهرداری و مالیات
+            <AlertDescription className="text-blue-200">
+              ⚠️ فقط در صورت شناسایی واقعی دستگاه‌های ماینر، جستجوی اطلاعات مالک
+              انجام خواهد شد
+              <br />
+              این سیستم به پایگاه‌های داده رسمی شرکت برق، مخابرات، ثبت احوال و
+              شهرداری ایلام متصل است
             </AlertDescription>
           </Alert>
         </CardContent>
