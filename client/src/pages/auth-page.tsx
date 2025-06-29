@@ -126,6 +126,19 @@ export default function AuthPage() {
             </form>
           </CardContent>
         </Card>
+
+        {/* Copyright Footer */}
+        <div className="mt-8 text-center space-y-1">
+          <p className="text-gray-400 text-sm">
+            © تمامی حق��ق محفوظ است برای Erfan Rajabee
+          </p>
+          <p className="text-gray-500 text-xs">
+            این نرم‌افزار تحت حمایت قوانین کپی‌رایت جمهوری اسلامی ایران می‌باشد
+          </p>
+          <p className="text-gray-500 text-xs font-bold">
+            بهار 1404 - ایران، ایلام
+          </p>
+        </div>
       </div>
     </div>
   );
