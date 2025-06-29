@@ -104,7 +104,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
           </h1>
           <p className="text-lg text-muted-foreground">
-            شرکت توزیع برق استان ایلام • جمهوری اسلامی ایران
+            ستاد مبارزه با جرائم سایبری استان ایلام • جمهوری اسلامی ایران
           </p>
         </motion.div>
 
