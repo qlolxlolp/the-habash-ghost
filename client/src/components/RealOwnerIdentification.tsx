@@ -392,10 +392,9 @@ export default function RealOwnerIdentification() {
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Zap className="w-3 h-3 text-gray-400" />
+                        <Wifi className="w-3 h-3 text-gray-400" />
                         <span className="text-gray-300">
-                          مصرف برق:{" "}
-                          {owner.electricityAccount.currentConsumption}W
+                          اینترنت: {owner.internetConnection.provider}
                         </span>
                       </div>
                     </div>
