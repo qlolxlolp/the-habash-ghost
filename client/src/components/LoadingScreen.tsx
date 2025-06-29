@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Shield, Zap, Search, Radio, Waves } from "lucide-react";
+import { Cpu, Shield, Search, Radio, Waves } from "lucide-react";
 
 interface LoadingScreenProps {
   onComplete: () => void;
