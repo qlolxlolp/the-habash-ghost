@@ -106,7 +106,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = async (username: string, password: string) => {
-    await loginMutation.mutateAsync({ username, password });
+    const result = await loginMutation.mutateAsync({ username, password });
+    // Navigation will be handled by the component that calls this
+    return result;
   };
 
   const logout = async () => {
