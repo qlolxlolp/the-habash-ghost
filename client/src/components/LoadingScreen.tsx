@@ -13,7 +13,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const loadingSteps = [
     {
       icon: Cpu,
-      text: "اتصال به سنسورهای قدرت استان ایلام...",
+      text: "راه‌اندازی ماژول تشخیص شبکه...",
       duration: 2000,
     },
     {
@@ -28,18 +28,13 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     },
     {
       icon: Search,
-      text: "اسکن شبکه‌های برق شهری و روستایی ایلام...",
+      text: "اسکن شبکه‌های محلی و اینترنتی ایلام...",
       duration: 1400,
     },
     {
       icon: Shield,
       text: "بارگذاری دیتابیس دستگاه‌های مشکوک تایید شده...",
       duration: 1200,
-    },
-    {
-      icon: Zap,
-      text: "ارتباط با مرکز توزیع برق استان ایلام...",
-      duration: 2000,
     },
   ];
 
