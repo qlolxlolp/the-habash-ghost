@@ -480,7 +480,7 @@ export default function RealOwnerIdentification() {
                   </div>
                 </div>
 
-                {/* اینترنت */}
+                {/* ��ینترنت */}
                 <div>
                   <h4 className="text-white font-medium mb-3 flex items-center gap-2">
                     <Wifi className="w-4 h-4" />
