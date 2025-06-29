@@ -22,15 +22,15 @@ function Router() {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isAppLoading, setIsAppLoading] = useState(true);
 
   useEffect(() => {
     // Set dark theme
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.add("dark");
   }, []);
 
-  if (isLoading) {
-    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  if (isAppLoading) {
+    return <LoadingScreen onComplete={() => setIsAppLoading(false)} />;
   }
 
   return (
