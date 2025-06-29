@@ -105,9 +105,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-foreground mb-2">شبح حبشی</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
+          </h1>
           <p className="text-lg text-muted-foreground">
-            استان ایلام • جمهوری اسلامی ایران
+            شرکت توزیع برق استان ایلام • جمهوری اسلامی ایران
           </p>
         </motion.div>
 
