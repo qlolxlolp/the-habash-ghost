@@ -36,10 +36,10 @@ export default function Dashboard() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            سیستم تشخیص دستگاه‌های استخراج ارز دیجیتال
+            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
           </h1>
           <p className="text-center text-gray-300 text-lg">
-            استان ایلام - سامانه نظارت و کنترل شبکه
+            شرکت توزیع برق استان ایلام - وزارت نیرو - جمهوری اسلامی ایران
           </p>
         </div>
 
