@@ -23,6 +23,8 @@ import DatabaseStatus from "@/components/DatabaseStatus";
 import LiveMap from "@/components/LiveMap";
 import DeviceList from "@/components/DeviceList";
 import OwnerIdentification from "@/components/OwnerIdentification";
+import RealNetworkScanner from "@/components/RealNetworkScanner";
+import PowerMonitor from "@/components/PowerMonitor";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -118,13 +120,27 @@ export default function Dashboard() {
           onValueChange={setActiveTab}
           className="space-y-6"
         >
-          <TabsList className="grid w-full grid-cols-5 bg-slate-800 border-slate-700">
+          <TabsList className="grid w-full grid-cols-7 bg-slate-800 border-slate-700">
             <TabsTrigger
               value="overview"
               className="data-[state=active]:bg-slate-700"
             >
               <Activity className="w-4 h-4 mr-2" />
               نمای کلی
+            </TabsTrigger>
+            <TabsTrigger
+              value="network"
+              className="data-[state=active]:bg-slate-700"
+            >
+              <Radio className="w-4 h-4 mr-2" />
+              اسکن شبکه
+            </TabsTrigger>
+            <TabsTrigger
+              value="power"
+              className="data-[state=active]:bg-slate-700"
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              نظارت برق
             </TabsTrigger>
             <TabsTrigger
               value="map"
@@ -155,6 +171,14 @@ export default function Dashboard() {
               پایگاه داده
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="network">
+            <RealNetworkScanner />
+          </TabsContent>
+
+          <TabsContent value="power">
+            <PowerMonitor />
+          </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -193,7 +217,7 @@ export default function Dashboard() {
                 <CardHeader>
                   <CardTitle className="text-white">وضعیت شبکه</CardTitle>
                   <CardDescription className="text-gray-400">
-                    آمار کلی ش��که و دستگاه‌ها
+                    آمار کلی شبکه و دستگاه‌ها
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
