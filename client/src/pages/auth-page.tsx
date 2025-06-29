@@ -122,15 +122,6 @@ export default function AuthPage() {
                 {isLoading ? "در حال ورود..." : "ورود به سیستم"}
               </Button>
             </form>
-
-            <div className="mt-6 p-4 bg-slate-700 rounded-lg">
-              <p className="text-sm text-gray-300 text-center">
-                کاربر آزمایشی:
-              </p>
-              <p className="text-xs text-gray-400 text-center mt-1">
-                نام کاربری: qwerty | رمز عبور: azerty
-              </p>
-            </div>
           </CardContent>
         </Card>
       </div>
