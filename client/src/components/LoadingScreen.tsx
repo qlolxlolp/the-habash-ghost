@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Shield, Zap, Search, Radio, Waves } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Cpu, Shield, Zap, Search, Radio, Waves } from "lucide-react";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -11,33 +11,57 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [currentStep, setCurrentStep] = useState(0);
 
   const loadingSteps = [
-    { icon: Cpu, text: "راه‌اندازی ماژول تشخیص پردازنده...", duration: 800 },
-    { icon: Radio, text: "کالیبراسیون آنتن‌های RF...", duration: 1000 },
-    { icon: Waves, text: "تحلیل طیف فرکانسی...", duration: 900 },
-    { icon: Search, text: "اسکن شبکه‌های محلی...", duration: 700 },
-    { icon: Shield, text: "فعال‌سازی سیستم امنیتی...", duration: 600 },
-    { icon: Zap, text: "آماده‌سازی داشبورد...", duration: 500 }
+    {
+      icon: Cpu,
+      text: "اتصال به سنسورهای قدرت استان ایلام...",
+      duration: 2000,
+    },
+    {
+      icon: Radio,
+      text: "فعال‌سازی آنتن‌های RF برای تشخیص امواج ماینینگ...",
+      duration: 1800,
+    },
+    {
+      icon: Waves,
+      text: "تحلیل طیف الکترومغناطیسی دستگاه‌های ماینر...",
+      duration: 1600,
+    },
+    {
+      icon: Search,
+      text: "اسکن شبکه‌های برق شهری و روستایی ایلام...",
+      duration: 1400,
+    },
+    {
+      icon: Shield,
+      text: "بارگذاری دیتابیس دستگاه‌های مشکوک تایید شده...",
+      duration: 1200,
+    },
+    {
+      icon: Zap,
+      text: "ارتباط با مرکز توزیع برق استان ایلام...",
+      duration: 2000,
+    },
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         const newProgress = prev + 1;
         if (newProgress >= 100) {
           clearInterval(interval);
           setTimeout(onComplete, 500);
           return 100;
         }
-        
+
         // Update current step based on progress
         const stepIndex = Math.floor((newProgress / 100) * loadingSteps.length);
         if (stepIndex !== currentStep && stepIndex < loadingSteps.length) {
           setCurrentStep(stepIndex);
         }
-        
+
         return newProgress;
       });
-    }, 50);
+    }, 100); // 10 seconds total (100ms * 100 = 10000ms)
 
     return () => clearInterval(interval);
   }, [onComplete, currentStep, loadingSteps.length]);
@@ -48,10 +72,13 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     <div className="fixed inset-0 bg-gradient-to-br from-background via-persian-surface to-background flex items-center justify-center z-50">
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, hsl(207, 90%, 54%) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, hsl(195, 90%, 54%) 0%, transparent 50%)`
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, hsl(207, 90%, 54%) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, hsl(195, 90%, 54%) 0%, transparent 50%)`,
+          }}
+        />
       </div>
 
       <div className="relative z-10 text-center max-w-md mx-auto px-6">
@@ -77,10 +104,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               <Shield className="w-6 h-6 text-white" />
             </div>
           </div>
-          
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            شبح حبشی
-          </h1>
+
+          <h1 className="text-3xl font-bold text-foreground mb-2">شبح حبشی</h1>
           <p className="text-lg text-muted-foreground">
             استان ایلام • جمهوری اسلامی ایران
           </p>
@@ -98,14 +123,14 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           >
             <div className="flex items-center justify-center mb-4">
               <motion.div
-                animate={{ 
+                animate={{
                   scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360]
+                  rotate: [0, 180, 360],
                 }}
-                transition={{ 
-                  duration: 2, 
+                transition={{
+                  duration: 2,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut",
                 }}
                 className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4"
               >
@@ -145,12 +170,12 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               key={i}
               animate={{
                 opacity: [0.3, 1, 0.3],
-                scale: [0.8, 1, 0.8]
+                scale: [0.8, 1, 0.8],
               }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                delay: i * 0.2
+                delay: i * 0.2,
               }}
               className="h-1 bg-primary/60 rounded-full"
             />
