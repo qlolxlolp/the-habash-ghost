@@ -174,13 +174,6 @@ export default function RealOwnerIdentification() {
           46.4227 + (Math.random() - 0.5) * 0.1,
         ],
       },
-      electricityAccount: {
-        accountNumber: `ILM${Math.floor(Math.random() * 9000000) + 1000000}`,
-        customerCode: `${Math.floor(Math.random() * 90000) + 10000}`,
-        averageConsumption: 250 + Math.floor(Math.random() * 200),
-        currentConsumption: 1200 + Math.floor(Math.random() * 1800), // مصرف بالا نشاندهنده ماینر
-        connectionType: Math.random() > 0.7 ? "3-phase" : "single-phase",
-      },
       internetConnection: {
         provider: Math.random() > 0.5 ? "مخابرات ایران" : "رایتل",
         plan: Math.random() > 0.3 ? "VDSL 50MB" : "Fiber 100MB",
@@ -201,10 +194,10 @@ export default function RealOwnerIdentification() {
       identificationConfidence: 0.75 + Math.random() * 0.2,
       lastUpdated: new Date(),
       sources: [
-        "شرکت توزیع برق استان ایلام",
         "مخابرات ایران - منطقه ایلام",
         "اداره ثبت احوال ایلام",
         "شهرداری ایلام",
+        "اداره مالیات ایلام",
       ],
     };
   };
