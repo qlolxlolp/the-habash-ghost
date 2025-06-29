@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     retry: false,
     staleTime: 0,
     cacheTime: 0,
+    enabled: false, // Disable automatic query on mount
   });
 
   const loginMutation = useMutation({
