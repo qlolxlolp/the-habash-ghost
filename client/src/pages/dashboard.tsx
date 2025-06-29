@@ -202,22 +202,13 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-3 bg-slate-700 rounded-lg">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-white">
-                        دستگاه جدید شناسایی شد - IP: 192.168.1.45
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-slate-700 rounded-lg">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                      <span className="text-white">
-                        تغییر در مصرف برق - منطقه شرق ایلام
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-slate-700 rounded-lg">
-                      <div className="w-2 h-2 bg-red-400 rounded-full"></div>
-                      <span className="text-white">
-                        هشدار امنیتی - فعالیت مشکوک شناسایی شد
+                    <div className="flex items-center justify-center p-6 bg-slate-700 rounded-lg">
+                      <span className="text-gray-400 text-center">
+                        هیچ فعالیت واقعی ثبت نشده است
+                        <br />
+                        <span className="text-sm">
+                          بعد از شروع اسکن، فعالیت‌ها اینجا نمایش داده می‌شوند
+                        </span>
                       </span>
                     </div>
                   </div>
