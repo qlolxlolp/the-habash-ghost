@@ -22,7 +22,7 @@ import {
 import DatabaseStatus from "@/components/DatabaseStatus";
 import LiveMap from "@/components/LiveMap";
 import DeviceList from "@/components/DeviceList";
-import OwnerIdentification from "@/components/OwnerIdentification";
+import RealOwnerIdentification from "@/components/RealOwnerIdentification";
 import RealNetworkScanner from "@/components/RealNetworkScanner";
 import PowerMonitor from "@/components/PowerMonitor";
 
@@ -38,7 +38,7 @@ export default function Dashboard() {
             سیستم تشخیص دستگاه‌های استخراج ارز دیجیتال
           </h1>
           <p className="text-center text-gray-300 text-lg">
-            ��ستان ایلام - سامانه نظارت و کنترل شبکه
+            استان ایلام - سامانه نظارت و کنترل شبکه
           </p>
         </div>
 
@@ -235,7 +235,7 @@ export default function Dashboard() {
                       <span className="text-white font-bold">25.6 kW</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">��خرین اسکن</span>
+                      <span className="text-gray-300">آخرین اسکن</span>
                       <span className="text-white font-bold">2 دقیقه پیش</span>
                     </div>
                   </div>
@@ -253,7 +253,7 @@ export default function Dashboard() {
           </TabsContent>
 
           <TabsContent value="owner">
-            <OwnerIdentification />
+            <RealOwnerIdentification />
           </TabsContent>
 
           <TabsContent value="database">
