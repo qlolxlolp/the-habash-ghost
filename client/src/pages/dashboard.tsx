@@ -45,7 +45,7 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Cards - Only Real Data */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-blue-500">
             <CardHeader className="pb-2">
               <CardTitle className="text-white flex items-center gap-2">
@@ -57,24 +57,6 @@ export default function Dashboard() {
               <div className="text-3xl font-bold text-white mb-1">0</div>
               <Badge variant="secondary" className="bg-blue-800 text-blue-100">
                 آماده اسکن
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-green-600 to-green-700 border-green-500">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-white flex items-center gap-2">
-                <Zap className="w-5 h-5" />
-                مصرف برق کل
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-white mb-1">0 MW</div>
-              <Badge
-                variant="secondary"
-                className="bg-green-800 text-green-100"
-              >
-                در انتظار داده
               </Badge>
             </CardContent>
           </Card>
@@ -207,7 +189,7 @@ export default function Dashboard() {
                         هیچ فعالیت واقعی ثبت نشده است
                         <br />
                         <span className="text-sm">
-                          بعد از شروع اسکن، فعالیت‌ه�� اینجا نمایش داده می‌شوند
+                          بعد از شروع اسکن، فعالیت‌ها اینجا نمایش داده می‌شوند
                         </span>
                       </span>
                     </div>
