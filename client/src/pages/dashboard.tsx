@@ -35,10 +35,13 @@ export default function Dashboard() {
       <div className="container mx-auto p-6">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
+          <h1 className="text-5xl font-bold text-center mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            شبح حبشی
           </h1>
-          <p className="text-center text-gray-300 text-lg">
+          <p className="text-center text-gray-300 text-xl mb-2">
+            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
+          </p>
+          <p className="text-center text-gray-400 text-sm">
             ستاد مبارزه با جرائم سایبری استان ایلام - جمهوری اسلامی ایران
           </p>
         </div>
