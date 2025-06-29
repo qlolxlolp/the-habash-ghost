@@ -13,7 +13,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const loadingSteps = [
     {
       icon: Cpu,
-      text: "راه‌اندازی ماژول تشخیص شبکه...",
+      text: "راه‌اندا��ی ماژول تشخیص شبکه...",
       duration: 2000,
     },
     {
@@ -100,10 +100,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
-          </h1>
+          <h1 className="text-4xl font-bold text-foreground mb-2">شبح حبشی</h1>
           <p className="text-lg text-muted-foreground">
+            سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
             ستاد مبارزه با جرائم سایبری استان ایلام • جمهوری اسلامی ایران
           </p>
         </motion.div>
