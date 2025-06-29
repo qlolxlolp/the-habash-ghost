@@ -17,7 +17,6 @@ import {
   Database,
   Radio,
   Shield,
-  Zap,
   AlertTriangle,
 } from "lucide-react";
 import DatabaseStatus from "@/components/DatabaseStatus";
