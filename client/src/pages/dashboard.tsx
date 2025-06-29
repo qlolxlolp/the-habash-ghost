@@ -25,6 +25,7 @@ import DeviceList from "@/components/DeviceList";
 import RealOwnerIdentification from "@/components/RealOwnerIdentification";
 import RealNetworkScanner from "@/components/RealNetworkScanner";
 import PowerMonitor from "@/components/PowerMonitor";
+import RealLocationTracker from "@/components/RealLocationTracker";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -120,7 +121,7 @@ export default function Dashboard() {
           onValueChange={setActiveTab}
           className="space-y-6"
         >
-          <TabsList className="grid w-full grid-cols-7 bg-slate-800 border-slate-700">
+          <TabsList className="grid w-full grid-cols-8 bg-slate-800 border-slate-700">
             <TabsTrigger
               value="overview"
               className="data-[state=active]:bg-slate-700"
@@ -141,6 +142,13 @@ export default function Dashboard() {
             >
               <Zap className="w-4 h-4 mr-2" />
               نظارت برق
+            </TabsTrigger>
+            <TabsTrigger
+              value="location"
+              className="data-[state=active]:bg-slate-700"
+            >
+              <MapPin className="w-4 h-4 mr-2" />
+              ردیابی مکان
             </TabsTrigger>
             <TabsTrigger
               value="map"
@@ -178,6 +186,10 @@ export default function Dashboard() {
 
           <TabsContent value="power">
             <PowerMonitor />
+          </TabsContent>
+
+          <TabsContent value="location">
+            <RealLocationTracker />
           </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">
