@@ -54,11 +54,13 @@ export default function AuthPage() {
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <Shield className="w-8 h-8 text-white" />
             </div>
-            <CardTitle className="text-2xl text-white">ورود به سیستم</CardTitle>
+            <CardTitle className="text-3xl text-white font-bold">
+              شبح حبشی
+            </CardTitle>
             <CardDescription className="text-gray-400">
-              سیستم تشخیص دستگاه‌های استخراج ارز دیجیتال
+              سامانه تشخیص و شناسایی دستگاه‌های استخراج ارز دیجیتال
               <br />
-              استان ایلام
+              ستاد مبارزه با جرائم سایبری استان ایلام
             </CardDescription>
           </CardHeader>
           <CardContent>
