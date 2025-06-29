@@ -168,8 +168,9 @@ export default function Dashboard() {
             <Alert className="bg-red-900/20 border-red-700">
               <AlertTriangle className="w-4 h-4" />
               <AlertDescription className="text-red-200">
-                <strong>⚠️ توجه مهم:</strong> این سامانه فقط داده‌های واقعی حاصل
-                از اسکن‌های واقعی شبکه و نظارت برق استان ایلام را نمایش می‌دهد.
+                <strong>⚠️ توجه مهم:</strong> این سامان�� فقط داده‌های واقعی
+                حاصل از اسکن‌های واقعی شبکه و نظارت برق استان ایلام را نمایش
+                می‌دهد.
                 <br />
                 هیچ داده ساختگی یا نمایشی در این سیستم وجود ندارد. تمام اطلاعات
                 از عملیات‌های حقیقی تشخیص و شناسایی حاصل می‌شوند.
@@ -246,6 +247,22 @@ export default function Dashboard() {
             <DatabaseStatus />
           </TabsContent>
         </Tabs>
+
+        {/* Copyright Footer */}
+        <footer className="mt-12 py-6 border-t border-slate-700">
+          <div className="text-center space-y-2">
+            <p className="text-gray-400 text-sm">
+              © تمامی حقوق محفوظ است ��رای Erfan Rajabee
+            </p>
+            <p className="text-gray-500 text-xs">
+              این نرم‌افزار تحت حمایت قوانین کپی‌رایت جمهوری اسلامی ایران
+              می‌باشد
+            </p>
+            <p className="text-gray-500 text-xs font-bold">
+              بهار 1404 - ایران، ایلام
+            </p>
+          </div>
+        </footer>
       </div>
     </div>
   );
