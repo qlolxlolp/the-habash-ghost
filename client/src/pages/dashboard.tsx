@@ -192,6 +192,17 @@ export default function Dashboard() {
           </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">
+            <Alert className="bg-red-900/20 border-red-700">
+              <AlertTriangle className="w-4 h-4" />
+              <AlertDescription className="text-red-200">
+                <strong>⚠️ توجه مهم:</strong> این سامانه فقط داده‌های واقعی حاصل
+                از اسکن‌های واقعی شبکه و نظارت برق استان ایلام را نمایش می‌دهد.
+                <br />
+                هیچ داده ساختگی یا نمایشی در این سیستم وجود ندارد. تمام اطلاعات
+                از عملیات‌های حقیقی تشخیص و شناسایی حاصل می‌شوند.
+              </AlertDescription>
+            </Alert>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card className="bg-slate-800 border-slate-700">
                 <CardHeader>
