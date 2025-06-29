@@ -480,42 +480,6 @@ export default function RealOwnerIdentification() {
                   </div>
                 </div>
 
-                {/* برق */}
-                <div>
-                  <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-                    <Zap className="w-4 h-4" />
-                    اطلاعات برق
-                  </h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">شماره اشتراک:</span>
-                      <span className="text-white">
-                        {selectedOwner.electricityAccount.accountNumber}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">مصرف متوسط:</span>
-                      <span className="text-white">
-                        {selectedOwner.electricityAccount.averageConsumption}W
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">مصرف فعلی:</span>
-                      <span
-                        className={`font-bold ${selectedOwner.electricityAccount.currentConsumption > selectedOwner.electricityAccount.averageConsumption * 3 ? "text-red-400" : "text-white"}`}
-                      >
-                        {selectedOwner.electricityAccount.currentConsumption}W
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">نوع اتصال:</span>
-                      <span className="text-white">
-                        {selectedOwner.electricityAccount.connectionType}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
                 {/* اینترنت */}
                 <div>
                   <h4 className="text-white font-medium mb-3 flex items-center gap-2">
