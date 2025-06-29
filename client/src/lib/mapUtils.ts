@@ -222,51 +222,5 @@ export function getThreatLevelBadge(
   }
 }
 
-export function generateMockMiners(count: number = 15): DetectedMiner[] {
-  const algorithms = ["SHA-256", "Scrypt", "Ethash", "X11", "Blake2b"];
-  const pools = [
-    "mining.pool.com",
-    "crypto.pool.org",
-    "hashpower.net",
-    "blockchain.mining",
-  ];
-
-  const devices: DetectedMiner[] = [];
-
-  for (let i = 0; i < count; i++) {
-    // Generate random coordinates within Ilam province bounds
-    const lat = 32.8 + Math.random() * (34.2 - 32.8);
-    const lng = 45.4 + Math.random() * (47.8 - 45.4);
-    const confidence = 0.6 + Math.random() * 0.4;
-
-    let threatLevel: DetectedMiner["threatLevel"];
-    if (confidence > 0.9) threatLevel = "critical";
-    else if (confidence > 0.8) threatLevel = "high";
-    else if (confidence > 0.7) threatLevel = "medium";
-    else threatLevel = "low";
-
-    devices.push({
-      id: `miner-${i + 1}`,
-      ip: `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-      location: [lat, lng],
-      province: "ایلام",
-      city: findNearestCity(lat, lng),
-      confidence,
-      powerConsumption: 500 + Math.random() * 2000,
-      lastSeen: new Date(Date.now() - Math.random() * 86400000).toISOString(),
-      status:
-        Math.random() > 0.8
-          ? "suspicious"
-          : Math.random() > 0.1
-            ? "active"
-            : "inactive",
-      hashRate: Math.random() * 100e12, // Random hash rate up to 100 TH/s
-      algorithm: algorithms[Math.floor(Math.random() * algorithms.length)],
-      pool: pools[Math.floor(Math.random() * pools.length)],
-      wallet: `1${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`,
-      threatLevel,
-    });
-  }
-
-  return devices;
-}
+// Real miner detection will be populated by actual network scans and power analysis
+// No mock data generation - only confirmed miners from real operations will be stored
