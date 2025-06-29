@@ -31,7 +31,7 @@ export default function AuthPage() {
 
     try {
       await login(formData.username, formData.password);
-      // login function handles navigation through mutation success
+      setLocation("/"); // Navigate on successful login
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در ورود به سیستم");
     } finally {
