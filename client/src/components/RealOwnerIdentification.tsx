@@ -80,14 +80,9 @@ export default function RealOwnerIdentification() {
   ): Promise<OwnerInfo[]> => {
     const searchStages = [
       {
-        stage: "electricity",
-        task: "جستجو در پایگاه داده شرکت برق استان ایلام...",
-        duration: 2000,
-      },
-      {
         stage: "telecom",
         task: "بررسی اطلاعات مخابراتی و اینترنتی...",
-        duration: 1800,
+        duration: 2000,
       },
       {
         stage: "registry",
@@ -96,13 +91,13 @@ export default function RealOwnerIdentification() {
       },
       {
         stage: "municipality",
-        task: "بررسی اطلاعات شهرداری و پروانه‌ها...",
-        duration: 1500,
+        task: "بررسی اطلاعا�� شهرداری و پروانه‌ها...",
+        duration: 1800,
       },
       {
         stage: "taxation",
         task: "جستجو در پایگاه مالیاتی و اقتصادی...",
-        duration: 1300,
+        duration: 1500,
       },
     ];
 
@@ -140,7 +135,7 @@ export default function RealOwnerIdentification() {
       "احمد رضایی",
       "فاطمه احمدی",
       "محمد حسینی",
-      "زهرا کریمی",
+      "زهرا ک��یمی",
       "علی محمدی",
       "مریم نجفی",
       "حسن صادقی",
