@@ -25,7 +25,7 @@ import LiveMap from "@/components/LiveMap";
 import DeviceList from "@/components/DeviceList";
 import RealOwnerIdentification from "@/components/RealOwnerIdentification";
 import RealNetworkScanner from "@/components/RealNetworkScanner";
-import PowerMonitor from "@/components/PowerMonitor";
+
 import RealLocationTracker from "@/components/RealLocationTracker";
 
 export default function Dashboard() {
@@ -121,7 +121,7 @@ export default function Dashboard() {
           onValueChange={setActiveTab}
           className="space-y-6"
         >
-          <TabsList className="grid w-full grid-cols-8 bg-slate-800 border-slate-700">
+          <TabsList className="grid w-full grid-cols-7 bg-slate-800 border-slate-700">
             <TabsTrigger
               value="overview"
               className="data-[state=active]:bg-slate-700"
@@ -135,13 +135,6 @@ export default function Dashboard() {
             >
               <Radio className="w-4 h-4 mr-2" />
               اسکن شبکه
-            </TabsTrigger>
-            <TabsTrigger
-              value="power"
-              className="data-[state=active]:bg-slate-700"
-            >
-              <Zap className="w-4 h-4 mr-2" />
-              نظارت برق
             </TabsTrigger>
             <TabsTrigger
               value="location"
@@ -179,13 +172,8 @@ export default function Dashboard() {
               پایگاه داده
             </TabsTrigger>
           </TabsList>
-
           <TabsContent value="network">
             <RealNetworkScanner />
-          </TabsContent>
-
-          <TabsContent value="power">
-            <PowerMonitor />
           </TabsContent>
 
           <TabsContent value="location">
@@ -219,7 +207,7 @@ export default function Dashboard() {
                         هیچ فعالیت واقعی ثبت نشده است
                         <br />
                         <span className="text-sm">
-                          بعد از شروع اسکن، فعالیت‌ها اینجا نمایش داده می‌شوند
+                          بعد از شروع اسکن، فعالیت‌ه�� اینجا نمایش داده می‌شوند
                         </span>
                       </span>
                     </div>
