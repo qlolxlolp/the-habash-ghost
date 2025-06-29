@@ -43,7 +43,7 @@ export default function Dashboard() {
           </p>
         </div>
 
-        {/* Stats Cards */}
+        {/* Stats Cards - Only Real Data */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-blue-600 to-blue-700 border-blue-500">
             <CardHeader className="pb-2">
@@ -53,9 +53,9 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-white mb-1">47</div>
+              <div className="text-3xl font-bold text-white mb-1">0</div>
               <Badge variant="secondary" className="bg-blue-800 text-blue-100">
-                فعال
+                آماده اسکن
               </Badge>
             </CardContent>
           </Card>
@@ -68,12 +68,12 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-white mb-1">1.2 MW</div>
+              <div className="text-3xl font-bold text-white mb-1">0 MW</div>
               <Badge
                 variant="secondary"
                 className="bg-green-800 text-green-100"
               >
-                بالا
+                در انتظار داده
               </Badge>
             </CardContent>
           </Card>
@@ -86,12 +86,12 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-white mb-1">12</div>
+              <div className="text-3xl font-bold text-white mb-1">0</div>
               <Badge
-                variant="destructive"
+                variant="secondary"
                 className="bg-orange-800 text-orange-100"
               >
-                نیاز به بررسی
+                پایگاه خالی
               </Badge>
             </CardContent>
           </Card>
@@ -104,17 +104,16 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-white mb-1">99%</div>
+              <div className="text-3xl font-bold text-white mb-1">100%</div>
               <Badge
                 variant="secondary"
                 className="bg-purple-800 text-purple-100"
               >
-                عملیاتی
+                آماده کار
               </Badge>
             </CardContent>
           </Card>
         </div>
-
         {/* Main Content Tabs */}
         <Tabs
           value={activeTab}
