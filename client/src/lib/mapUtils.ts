@@ -19,6 +19,14 @@ export interface DetectedDevice {
   status: "active" | "inactive" | "suspicious";
 }
 
+export interface DetectedMiner extends DetectedDevice {
+  hashRate: number;
+  algorithm: string;
+  pool: string;
+  wallet: string;
+  threatLevel: "low" | "medium" | "high" | "critical";
+}
+
 // Ilam Province boundaries and cities
 export const ILAM_PROVINCE: IranProvince = {
   name: "ایلام",
@@ -179,4 +187,112 @@ export function getDeviceStatusBadge(status: DetectedDevice["status"]): string {
     default:
       return "bg-gray-600";
   }
+}
+
+// Cryptocurrency mining utility functions
+export function formatHashRate(hashRate: number): string {
+  if (hashRate >= 1e12) {
+    return `${(hashRate / 1e12).toFixed(2)} TH/s`;
+  } else if (hashRate >= 1e9) {
+    return `${(hashRate / 1e9).toFixed(2)} GH/s`;
+  } else if (hashRate >= 1e6) {
+    return `${(hashRate / 1e6).toFixed(2)} MH/s`;
+  } else if (hashRate >= 1e3) {
+    return `${(hashRate / 1e3).toFixed(2)} KH/s`;
+  }
+  return `${hashRate.toFixed(2)} H/s`;
+}
+
+export function formatPowerConsumption(power: number): string {
+  if (power >= 1000) {
+    return `${(power / 1000).toFixed(2)} kW`;
+  }
+  return `${power.toFixed(0)} W`;
+}
+
+export function formatConfidenceScore(confidence: number): string {
+  return `${(confidence * 100).toFixed(1)}%`;
+}
+
+export function getThreatLevelColor(
+  level: DetectedMiner["threatLevel"],
+): string {
+  switch (level) {
+    case "low":
+      return "text-green-400";
+    case "medium":
+      return "text-yellow-400";
+    case "high":
+      return "text-orange-400";
+    case "critical":
+      return "text-red-400";
+    default:
+      return "text-gray-400";
+  }
+}
+
+export function getThreatLevelBadge(
+  level: DetectedMiner["threatLevel"],
+): string {
+  switch (level) {
+    case "low":
+      return "bg-green-600";
+    case "medium":
+      return "bg-yellow-600";
+    case "high":
+      return "bg-orange-600";
+    case "critical":
+      return "bg-red-600";
+    default:
+      return "bg-gray-600";
+  }
+}
+
+export function generateMockMiners(count: number = 15): DetectedMiner[] {
+  const algorithms = ["SHA-256", "Scrypt", "Ethash", "X11", "Blake2b"];
+  const pools = [
+    "mining.pool.com",
+    "crypto.pool.org",
+    "hashpower.net",
+    "blockchain.mining",
+  ];
+
+  const devices: DetectedMiner[] = [];
+
+  for (let i = 0; i < count; i++) {
+    // Generate random coordinates within Ilam province bounds
+    const lat = 32.8 + Math.random() * (34.2 - 32.8);
+    const lng = 45.4 + Math.random() * (47.8 - 45.4);
+    const confidence = 0.6 + Math.random() * 0.4;
+
+    let threatLevel: DetectedMiner["threatLevel"];
+    if (confidence > 0.9) threatLevel = "critical";
+    else if (confidence > 0.8) threatLevel = "high";
+    else if (confidence > 0.7) threatLevel = "medium";
+    else threatLevel = "low";
+
+    devices.push({
+      id: `miner-${i + 1}`,
+      ip: `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
+      location: [lat, lng],
+      province: "ایلام",
+      city: findNearestCity(lat, lng),
+      confidence,
+      powerConsumption: 500 + Math.random() * 2000,
+      lastSeen: new Date(Date.now() - Math.random() * 86400000).toISOString(),
+      status:
+        Math.random() > 0.8
+          ? "suspicious"
+          : Math.random() > 0.1
+            ? "active"
+            : "inactive",
+      hashRate: Math.random() * 100e12, // Random hash rate up to 100 TH/s
+      algorithm: algorithms[Math.floor(Math.random() * algorithms.length)],
+      pool: pools[Math.floor(Math.random() * pools.length)],
+      wallet: `1${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`,
+      threatLevel,
+    });
+  }
+
+  return devices;
 }
