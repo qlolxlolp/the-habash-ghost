@@ -1,7 +1,7 @@
-import { 
-  detectedMiners, 
-  networkConnections, 
-  scanSessions, 
+import {
+  detectedMiners,
+  networkConnections,
+  scanSessions,
   systemActivities,
   users,
   rfSignals,
@@ -9,7 +9,7 @@ import {
   acousticSignatures,
   thermalSignatures,
   networkTraffic,
-  type DetectedMiner, 
+  type DetectedMiner,
   type InsertMiner,
   type NetworkConnection,
   type InsertConnection,
@@ -17,7 +17,7 @@ import {
   type InsertScanSession,
   type SystemActivity,
   type InsertActivity,
-  type User, 
+  type User,
   type InsertUser,
   type RfSignal,
   type InsertRfSignal,
@@ -28,7 +28,7 @@ import {
   type ThermalSignature,
   type InsertThermalSignature,
   type NetworkTraffic,
-  type InsertNetworkTraffic
+  type InsertNetworkTraffic,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, gte, lte } from "drizzle-orm";
@@ -37,7 +37,7 @@ import connectPg from "connect-pg-simple";
 import { pool } from "./db";
 
 export interface IStorage {
-  // User methods  
+  // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
@@ -46,9 +46,17 @@ export interface IStorage {
   getDetectedMiners(): Promise<DetectedMiner[]>;
   getMinerById(id: number): Promise<DetectedMiner | undefined>;
   createMiner(miner: InsertMiner): Promise<DetectedMiner>;
-  updateMiner(id: number, updates: Partial<InsertMiner>): Promise<DetectedMiner | undefined>;
+  updateMiner(
+    id: number,
+    updates: Partial<InsertMiner>,
+  ): Promise<DetectedMiner | undefined>;
   getActiveMiners(): Promise<DetectedMiner[]>;
-  getMinersInArea(bounds: { north: number; south: number; east: number; west: number }): Promise<DetectedMiner[]>;
+  getMinersInArea(bounds: {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+  }): Promise<DetectedMiner[]>;
 
   // Network connections
   getNetworkConnections(): Promise<NetworkConnection[]>;
@@ -58,7 +66,10 @@ export interface IStorage {
   // Scan sessions
   getScanSessions(): Promise<ScanSession[]>;
   createScanSession(session: InsertScanSession): Promise<ScanSession>;
-  updateScanSession(id: number, updates: Partial<InsertScanSession>): Promise<ScanSession | undefined>;
+  updateScanSession(
+    id: number,
+    updates: Partial<InsertScanSession>,
+  ): Promise<ScanSession | undefined>;
   getActiveScanSessions(): Promise<ScanSession[]>;
 
   // System activities
@@ -76,11 +87,15 @@ export interface IStorage {
 
   // Acoustic Signatures
   getAcousticSignatures(): Promise<AcousticSignature[]>;
-  createAcousticSignature(signature: InsertAcousticSignature): Promise<AcousticSignature>;
+  createAcousticSignature(
+    signature: InsertAcousticSignature,
+  ): Promise<AcousticSignature>;
 
   // Thermal Signatures
   getThermalSignatures(): Promise<ThermalSignature[]>;
-  createThermalSignature(signature: InsertThermalSignature): Promise<ThermalSignature>;
+  createThermalSignature(
+    signature: InsertThermalSignature,
+  ): Promise<ThermalSignature>;
 
   // Network Traffic
   getNetworkTraffic(): Promise<NetworkTraffic[]>;
@@ -114,7 +129,7 @@ const mockStatistics = {
   networkHealth: 0,
   rfSignalsDetected: 0,
   acousticSignatures: 0,
-  thermalAnomalies: 0
+  thermalAnomalies: 0,
 };
 
 const mockMiners: any[] = [];
@@ -142,26 +157,38 @@ export function addActivity(activity: any) {
   // This will be populated by real scan results
 }
 
+// In-memory storage for users until database is properly set up
+const inMemoryUsers: User[] = [];
+let userIdCounter = 1;
+
 export class DatabaseStorage implements IStorage {
   sessionStore: any;
 
   constructor() {
-    this.sessionStore = new PostgresSessionStore({ 
-      pool, 
-      createTableIfMissing: true 
+    // Use memory store for session instead of postgres to avoid db issues
+    const MemoryStore = require("memorystore")(session);
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
     });
   }
 
   async getUser(id: number): Promise<User | undefined> {
-    return undefined;
+    return inMemoryUsers.find((user) => user.id === id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return undefined;
+    return inMemoryUsers.find((user) => user.username === username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    return insertUser as User;
+    const user: User = {
+      id: userIdCounter++,
+      ...insertUser,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    inMemoryUsers.push(user);
+    return user;
   }
 
   async getDetectedMiners(): Promise<DetectedMiner[]> {
@@ -176,7 +203,10 @@ export class DatabaseStorage implements IStorage {
     return insertMiner as DetectedMiner;
   }
 
-  async updateMiner(id: number, updates: Partial<InsertMiner>): Promise<DetectedMiner | undefined> {
+  async updateMiner(
+    id: number,
+    updates: Partial<InsertMiner>,
+  ): Promise<DetectedMiner | undefined> {
     return undefined;
   }
 
@@ -184,7 +214,12 @@ export class DatabaseStorage implements IStorage {
     return [];
   }
 
-  async getMinersInArea(bounds: { north: number; south: number; east: number; west: number }): Promise<DetectedMiner[]> {
+  async getMinersInArea(bounds: {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+  }): Promise<DetectedMiner[]> {
     return [];
   }
 
@@ -192,7 +227,9 @@ export class DatabaseStorage implements IStorage {
     return [];
   }
 
-  async createConnection(insertConnection: InsertConnection): Promise<NetworkConnection> {
+  async createConnection(
+    insertConnection: InsertConnection,
+  ): Promise<NetworkConnection> {
     return insertConnection as NetworkConnection;
   }
 
@@ -204,11 +241,16 @@ export class DatabaseStorage implements IStorage {
     return [];
   }
 
-  async createScanSession(insertSession: InsertScanSession): Promise<ScanSession> {
+  async createScanSession(
+    insertSession: InsertScanSession,
+  ): Promise<ScanSession> {
     return insertSession as ScanSession;
   }
 
-  async updateScanSession(id: number, updates: Partial<InsertScanSession>): Promise<ScanSession | undefined> {
+  async updateScanSession(
+    id: number,
+    updates: Partial<InsertScanSession>,
+  ): Promise<ScanSession | undefined> {
     return undefined;
   }
 
@@ -220,194 +262,223 @@ export class DatabaseStorage implements IStorage {
     return [];
   }
 
-  async createActivity(insertActivity: InsertActivity): Promise<SystemActivity> {
+  async createActivity(
+    insertActivity: InsertActivity,
+  ): Promise<SystemActivity> {
     return insertActivity as SystemActivity;
   }
 
   async getRfSignals(): Promise<RfSignal[]> {
-      return [];
+    return [];
   }
 
   async createRfSignal(insertSignal: InsertRfSignal): Promise<RfSignal> {
-      return insertSignal as RfSignal;
+    return insertSignal as RfSignal;
   }
 
   async getRfSignalsByLocation(location: string): Promise<RfSignal[]> {
-      return [];
+    return [];
   }
 
   async getPlcAnalyses(): Promise<PlcAnalysis[]> {
-      return [];
+    return [];
   }
 
-  async createPlcAnalysis(insertAnalysis: InsertPlcAnalysis): Promise<PlcAnalysis> {
-      return insertAnalysis as PlcAnalysis;
+  async createPlcAnalysis(
+    insertAnalysis: InsertPlcAnalysis,
+  ): Promise<PlcAnalysis> {
+    return insertAnalysis as PlcAnalysis;
   }
 
   async getAcousticSignatures(): Promise<AcousticSignature[]> {
-      return [];
+    return [];
   }
 
-  async createAcousticSignature(insertSignature: InsertAcousticSignature): Promise<AcousticSignature> {
-      return insertSignature as AcousticSignature;
+  async createAcousticSignature(
+    insertSignature: InsertAcousticSignature,
+  ): Promise<AcousticSignature> {
+    return insertSignature as AcousticSignature;
   }
 
   async getThermalSignatures(): Promise<ThermalSignature[]> {
-      return [];
+    return [];
   }
 
-  async createThermalSignature(insertSignature: InsertThermalSignature): Promise<ThermalSignature> {
-      return insertSignature as ThermalSignature;
+  async createThermalSignature(
+    insertSignature: InsertThermalSignature,
+  ): Promise<ThermalSignature> {
+    return insertSignature as ThermalSignature;
   }
 
   async getNetworkTraffic(): Promise<NetworkTraffic[]> {
-      return [];
+    return [];
   }
 
-  async createNetworkTraffic(insertTraffic: InsertNetworkTraffic): Promise<NetworkTraffic> {
-      return insertTraffic as NetworkTraffic;
+  async createNetworkTraffic(
+    insertTraffic: InsertNetworkTraffic,
+  ): Promise<NetworkTraffic> {
+    return insertTraffic as NetworkTraffic;
   }
 
   async getStratumConnections(): Promise<NetworkTraffic[]> {
-      return [];
+    return [];
   }
 
   async getStatistics(): Promise<{
-      totalDevices: number;
-      confirmedMiners: number;
-      suspiciousDevices: number;
-      totalPowerConsumption: number;
-      networkHealth: number;
-      rfSignalsDetected: number;
-      acousticSignatures: number;
-      thermalAnomalies: number;
+    totalDevices: number;
+    confirmedMiners: number;
+    suspiciousDevices: number;
+    totalPowerConsumption: number;
+    networkHealth: number;
+    rfSignalsDetected: number;
+    acousticSignatures: number;
+    thermalAnomalies: number;
   }> {
-      return {
-          totalDevices: 0,
-          confirmedMiners: 0,
-          suspiciousDevices: 0,
-          totalPowerConsumption: 0,
-          networkHealth: 0,
-          rfSignalsDetected: 0,
-          acousticSignatures: 0,
-          thermalAnomalies: 0,
-      };
+    return {
+      totalDevices: 0,
+      confirmedMiners: 0,
+      suspiciousDevices: 0,
+      totalPowerConsumption: 0,
+      networkHealth: 0,
+      rfSignalsDetected: 0,
+      acousticSignatures: 0,
+      thermalAnomalies: 0,
+    };
   }
 }
 
 export class MemStorage implements IStorage {
-    sessionStore: any;
-    async getUser(id: number): Promise<User | undefined> {
-        return undefined;
-    }
-    async getUserByUsername(username: string): Promise<User | undefined> {
-        return undefined;
-    }
-    async createUser(user: InsertUser): Promise<User> {
-        return user as User;
-    }
-    async getDetectedMiners(): Promise<DetectedMiner[]> {
-        return [];
-    }
-    async getMinerById(id: number): Promise<DetectedMiner | undefined> {
-        return undefined;
-    }
-    async createMiner(miner: InsertMiner): Promise<DetectedMiner> {
-        return miner as DetectedMiner;
-    }
-    async updateMiner(id: number, updates: Partial<InsertMiner>): Promise<DetectedMiner | undefined> {
-        return undefined;
-    }
-    async getActiveMiners(): Promise<DetectedMiner[]> {
-        return [];
-    }
-    async getMinersInArea(bounds: { north: number; south: number; east: number; west: number }): Promise<DetectedMiner[]> {
-        return [];
-    }
-    async getNetworkConnections(): Promise<NetworkConnection[]> {
-        return [];
-    }
-    async createConnection(connection: InsertConnection): Promise<NetworkConnection> {
-        return connection as NetworkConnection;
-    }
-    async getConnectionsByMiner(minerId: number): Promise<NetworkConnection[]> {
-        return [];
-    }
-    async getScanSessions(): Promise<ScanSession[]> {
-        return [];
-    }
-    async createScanSession(session: InsertScanSession): Promise<ScanSession> {
-        return session as ScanSession;
-    }
-    async updateScanSession(id: number, updates: Partial<InsertScanSession>): Promise<ScanSession | undefined> {
-        return undefined;
-    }
-    async getActiveScanSessions(): Promise<ScanSession[]> {
-        return [];
-    }
-    async getRecentActivities(limit?: number): Promise<SystemActivity[]> {
-        return [];
-    }
-    async createActivity(activity: InsertActivity): Promise<SystemActivity> {
-        return activity as SystemActivity;
-    }
-    async getRfSignals(): Promise<RfSignal[]> {
-        return [];
-    }
-    async createRfSignal(signal: InsertRfSignal): Promise<RfSignal> {
-        return signal as RfSignal;
-    }
-    async getRfSignalsByLocation(location: string): Promise<RfSignal[]> {
-        return [];
-    }
-    async getPlcAnalyses(): Promise<PlcAnalysis[]> {
-        return [];
-    }
-    async createPlcAnalysis(analysis: InsertPlcAnalysis): Promise<PlcAnalysis> {
-        return analysis as PlcAnalysis;
-    }
-    async getAcousticSignatures(): Promise<AcousticSignature[]> {
-        return [];
-    }
-    async createAcousticSignature(signature: InsertAcousticSignature): Promise<AcousticSignature> {
-        return signature as AcousticSignature;
-    }
-    async getThermalSignatures(): Promise<ThermalSignature[]> {
-        return [];
-    }
-    async createThermalSignature(signature: InsertThermalSignature): Promise<ThermalSignature> {
-        return signature as ThermalSignature;
-    }
-    async getNetworkTraffic(): Promise<NetworkTraffic[]> {
-        return [];
-    }
-    async createNetworkTraffic(traffic: InsertNetworkTraffic): Promise<NetworkTraffic> {
-        return traffic as NetworkTraffic;
-    }
-    async getStratumConnections(): Promise<NetworkTraffic[]> {
-        return [];
-    }
-    async getStatistics(): Promise<{
-        totalDevices: number;
-        confirmedMiners: number;
-        suspiciousDevices: number;
-        totalPowerConsumption: number;
-        networkHealth: number;
-        rfSignalsDetected: number;
-        acousticSignatures: number;
-        thermalAnomalies: number;
-    }> {
-        return {
-            totalDevices: 0,
-            confirmedMiners: 0,
-            suspiciousDevices: 0,
-            totalPowerConsumption: 0,
-            networkHealth: 0,
-            rfSignalsDetected: 0,
-            acousticSignatures: 0,
-            thermalAnomalies: 0
-        };
-    }
+  sessionStore: any;
+  async getUser(id: number): Promise<User | undefined> {
+    return undefined;
+  }
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return undefined;
+  }
+  async createUser(user: InsertUser): Promise<User> {
+    return user as User;
+  }
+  async getDetectedMiners(): Promise<DetectedMiner[]> {
+    return [];
+  }
+  async getMinerById(id: number): Promise<DetectedMiner | undefined> {
+    return undefined;
+  }
+  async createMiner(miner: InsertMiner): Promise<DetectedMiner> {
+    return miner as DetectedMiner;
+  }
+  async updateMiner(
+    id: number,
+    updates: Partial<InsertMiner>,
+  ): Promise<DetectedMiner | undefined> {
+    return undefined;
+  }
+  async getActiveMiners(): Promise<DetectedMiner[]> {
+    return [];
+  }
+  async getMinersInArea(bounds: {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+  }): Promise<DetectedMiner[]> {
+    return [];
+  }
+  async getNetworkConnections(): Promise<NetworkConnection[]> {
+    return [];
+  }
+  async createConnection(
+    connection: InsertConnection,
+  ): Promise<NetworkConnection> {
+    return connection as NetworkConnection;
+  }
+  async getConnectionsByMiner(minerId: number): Promise<NetworkConnection[]> {
+    return [];
+  }
+  async getScanSessions(): Promise<ScanSession[]> {
+    return [];
+  }
+  async createScanSession(session: InsertScanSession): Promise<ScanSession> {
+    return session as ScanSession;
+  }
+  async updateScanSession(
+    id: number,
+    updates: Partial<InsertScanSession>,
+  ): Promise<ScanSession | undefined> {
+    return undefined;
+  }
+  async getActiveScanSessions(): Promise<ScanSession[]> {
+    return [];
+  }
+  async getRecentActivities(limit?: number): Promise<SystemActivity[]> {
+    return [];
+  }
+  async createActivity(activity: InsertActivity): Promise<SystemActivity> {
+    return activity as SystemActivity;
+  }
+  async getRfSignals(): Promise<RfSignal[]> {
+    return [];
+  }
+  async createRfSignal(signal: InsertRfSignal): Promise<RfSignal> {
+    return signal as RfSignal;
+  }
+  async getRfSignalsByLocation(location: string): Promise<RfSignal[]> {
+    return [];
+  }
+  async getPlcAnalyses(): Promise<PlcAnalysis[]> {
+    return [];
+  }
+  async createPlcAnalysis(analysis: InsertPlcAnalysis): Promise<PlcAnalysis> {
+    return analysis as PlcAnalysis;
+  }
+  async getAcousticSignatures(): Promise<AcousticSignature[]> {
+    return [];
+  }
+  async createAcousticSignature(
+    signature: InsertAcousticSignature,
+  ): Promise<AcousticSignature> {
+    return signature as AcousticSignature;
+  }
+  async getThermalSignatures(): Promise<ThermalSignature[]> {
+    return [];
+  }
+  async createThermalSignature(
+    signature: InsertThermalSignature,
+  ): Promise<ThermalSignature> {
+    return signature as ThermalSignature;
+  }
+  async getNetworkTraffic(): Promise<NetworkTraffic[]> {
+    return [];
+  }
+  async createNetworkTraffic(
+    traffic: InsertNetworkTraffic,
+  ): Promise<NetworkTraffic> {
+    return traffic as NetworkTraffic;
+  }
+  async getStratumConnections(): Promise<NetworkTraffic[]> {
+    return [];
+  }
+  async getStatistics(): Promise<{
+    totalDevices: number;
+    confirmedMiners: number;
+    suspiciousDevices: number;
+    totalPowerConsumption: number;
+    networkHealth: number;
+    rfSignalsDetected: number;
+    acousticSignatures: number;
+    thermalAnomalies: number;
+  }> {
+    return {
+      totalDevices: 0,
+      confirmedMiners: 0,
+      suspiciousDevices: 0,
+      totalPowerConsumption: 0,
+      networkHealth: 0,
+      rfSignalsDetected: 0,
+      acousticSignatures: 0,
+      thermalAnomalies: 0,
+    };
+  }
 }
 
 export const storage = new DatabaseStorage();
