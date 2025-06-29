@@ -130,34 +130,8 @@ export function findNearestCity(lat: number, lng: number): string {
   return nearest.name;
 }
 
-export function generateMockDevices(count: number = 20): DetectedDevice[] {
-  const devices: DetectedDevice[] = [];
-
-  for (let i = 0; i < count; i++) {
-    // Generate random coordinates within Ilam province bounds
-    const lat = 32.8 + Math.random() * (34.2 - 32.8);
-    const lng = 45.4 + Math.random() * (47.8 - 45.4);
-
-    devices.push({
-      id: `device-${i + 1}`,
-      ip: `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-      location: [lat, lng],
-      province: "ایلام",
-      city: findNearestCity(lat, lng),
-      confidence: 0.7 + Math.random() * 0.3,
-      powerConsumption: 10 + Math.random() * 40,
-      lastSeen: new Date(Date.now() - Math.random() * 86400000).toISOString(),
-      status:
-        Math.random() > 0.8
-          ? "suspicious"
-          : Math.random() > 0.1
-            ? "active"
-            : "inactive",
-    });
-  }
-
-  return devices;
-}
+// Real device detection will be populated by actual network scans
+// No mock data generation - only real detected devices will be stored
 
 export function formatCoordinates(lat: number, lng: number): string {
   return `${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E`;
