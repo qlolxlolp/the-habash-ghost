@@ -226,19 +226,19 @@ export default function Dashboard() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300">دستگاه‌های آنلاین</span>
-                      <span className="text-white font-bold">43/47</span>
+                      <span className="text-white font-bold">0/0</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">نرخ تشخیص</span>
-                      <span className="text-white font-bold">98.2%</span>
+                      <span className="text-gray-300">وضعیت سیستم</span>
+                      <span className="text-white font-bold">آماده</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">متوسط مصرف برق</span>
-                      <span className="text-white font-bold">25.6 kW</span>
+                      <span className="text-gray-300">اتصال به شبکه برق</span>
+                      <span className="text-white font-bold">متصل</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300">آخرین اسکن</span>
-                      <span className="text-white font-bold">2 دقیقه پیش</span>
+                      <span className="text-white font-bold">انجام نشده</span>
                     </div>
                   </div>
                 </CardContent>
