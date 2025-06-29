@@ -10,14 +10,18 @@ export const queryClient = new QueryClient({
 });
 
 export async function apiRequest<T = any>(
+  method: string = "GET",
   url: string,
+  data?: any,
   options: RequestInit = {},
-): Promise<T> {
+): Promise<Response> {
   const response = await fetch(url, {
+    method,
     headers: {
       "Content-Type": "application/json",
       ...options.headers,
     },
+    body: data ? JSON.stringify(data) : undefined,
     ...options,
   });
 
@@ -28,9 +32,24 @@ export async function apiRequest<T = any>(
     );
   }
 
-  return response.json();
+  return response;
 }
 
-export function getQueryFn<T = any>(url: string) {
-  return () => apiRequest<T>(url);
+export function getQueryFn<T = any>(options?: { on401?: string }) {
+  return async (context: { queryKey: string[] }): Promise<T> => {
+    try {
+      const url = context.queryKey[0];
+      const response = await apiRequest("GET", url);
+      return await response.json();
+    } catch (error) {
+      if (
+        options?.on401 === "returnNull" &&
+        error instanceof Error &&
+        error.message.includes("401")
+      ) {
+        return null as T;
+      }
+      throw error;
+    }
+  };
 }
