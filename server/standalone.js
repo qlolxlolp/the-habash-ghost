@@ -164,12 +164,16 @@ app.get("/api/scans", (req, res) => {
   res.json([]);
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "public")));
+// Serve static files - در exe حالت path متفاوت است
+const publicPath = process.pkg
+  ? path.join(path.dirname(process.execPath), "public")
+  : path.join(__dirname, "..", "dist", "public");
+
+app.use(express.static(publicPath));
 
 // Catch-all handler for SPA
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 // WebSocket server
