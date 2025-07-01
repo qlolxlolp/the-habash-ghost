@@ -1,0 +1,115 @@
+<!-- App.xaml -->
+<Application x:Class="IlamMinerDetector.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- فونت پیش‌فرض -->
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily" Value="B Nazanin"/>
+                <Setter Property="FlowDirection" Value="RightToLeft"/>
+            </Style>
+            
+            <!-- استایل عمومی برای کنترل‌ها -->
+            <Style x:Key="ModernButton" TargetType="Button">
+                <Setter Property="Background" Value="#FF007ACC"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FF007ACC"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="15,8"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontFamily" Value="B Nazanin"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF1BA1E2"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#FF005A9B"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ModernTextBox" TargetType="TextBox">
+                <Setter Property="Background" Value="#FF3F3F46"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FF007ACC"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="FontFamily" Value="B Nazanin"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="3">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+                <Setter Property="Background" Value="#FF3F3F46"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FF007ACC"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="FontFamily" Value="B Nazanin"/>
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="AlternatingRowBackground" Value="#FF4A4A50"/>
+                <Setter Property="RowBackground" Value="#FF3F3F46"/>
+            </Style>
+
+            <Style x:Key="StatusBarStyle" TargetType="Border">
+                <Setter Property="Background" Value="#FF007ACC"/>
+                <Setter Property="Padding" Value="10,5"/>
+            </Style>
+
+            <Style x:Key="HeaderStyle" TargetType="Border">
+                <Setter Property="Background" Value="#FF007ACC"/>
+                <Setter Property="Padding" Value="15"/>
+            </Style>
+
+            <Style x:Key="PanelStyle" TargetType="Border">
+                <Setter Property="Background" Value="#FF3F3F46"/>
+                <Setter Property="BorderBrush" Value="#FF007ACC"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+
+            <!-- رنگ‌بندی برای سطوح مختلف خطر -->
+            <SolidColorBrush x:Key="HighRiskBrush" Color="#FFE74C3C"/>
+            <SolidColorBrush x:Key="MediumRiskBrush" Color="#FFF39C12"/>
+            <SolidColorBrush x:Key="LowRiskBrush" Color="#FFF1C40F"/>
+            <SolidColorBrush x:Key="SafeBrush" Color="#FF27AE60"/>
+            <SolidColorBrush x:Key="AccentBrush" Color="#FF007ACC"/>
+            <SolidColorBrush x:Key="DarkBrush" Color="#FF2D2D30"/>
+            <SolidColorBrush x:Key="MediumBrush" Color="#FF3F3F46"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
